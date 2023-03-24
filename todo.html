@@ -5,20 +5,40 @@
         </head>
 
         <input id = "todo-title" type="text"/>
+        <input id = "date-picker" type="date"/>
         <button onclick="addTodo()">Add Todo</button>
 
         <div id="todo-list"></div>
         <script>
            
-            let todos = ['Get Groceries','Wash Car','Make Dinner', 'Do laundry'];
+            const todos = [{            //create objects using {} which group different values that related
+                title:'Get Groceries',
+                dueDate:'2023-04-01'
+            },{
+                title:'Wash Car',
+                dueDate:'2023-04-02'
+            },{
+                title:'Make Dinner',
+                dueDate:'2023-04-05'
+            },{
+                title:'Do laundry',
+                dueDate:'2023-04-04'
+            }];
             
             render();
             
             function addTodo(){
 
-                let textbox = document.getElementById("todo-title");
-                let title = textbox.value;
-                todos.push(title);
+                const textbox = document.getElementById("todo-title");
+                const title = textbox.value;
+
+                const datePicker = document.getElementById("date-picker");
+                const dueDate = datePicker.value;
+
+                todos.push({
+                    title: title,
+                    dueDate: dueDate
+                });
 
                 render();
             }
@@ -27,10 +47,14 @@
 
                 document.getElementById('todo-list').innerHTML = ''; // reset the list
                 
-                todos.forEach(function(todoTitle){
-                    let element = document.createElement('div');
-                    element.innerText = todoTitle;
-                    let todoList = document.getElementById('todo-list');
+                todos.forEach(function(todo){
+                    const element = document.createElement('div');
+                    element.innerText = todo.title + ' ' + todo.dueDate;
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerText('Delete');
+                    
+                    const todoList = document.getElementById('todo-list');
                     todoList.appendChild(element);
                 });
 
