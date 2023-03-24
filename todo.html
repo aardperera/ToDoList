@@ -3,21 +3,34 @@
         <head>
             <title>My To Do List</title>
         </head>
-        <button>Press me</button>
+
+        <input id = "todo-title" type="text"/>
+        <button onclick="addTodo()">Add Todo</button>
         <script>
            
 
             let todos = ['Get Groceries','Wash Car','Make Dinner', 'Do laundry'];
-            todos.push('another todo');
             
-            todos.forEach(function(todoTitle){
-                let element = document.createElement('div');
-                element.innerText = todoTitle;
-                document.body.appendChild(element);
-            });
+            render();
             
-            
+            function addTodo(){
 
+                let textbox = document.getElementById("todo-title");
+                let title = textbox.value;
+                todos.push(title);
+
+                render();
+            }
+
+            function render(){
+                todos.forEach(function(todoTitle){
+                    let element = document.createElement('div');
+                    element.innerText = todoTitle;
+                    document.body.appendChild(element);
+                });
+
+            }
+            
         
         </script>
     </body>
