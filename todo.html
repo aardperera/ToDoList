@@ -12,23 +12,37 @@
         <script>
             //Model
             //contains all the code that saves and manages data
-            let todos = [{            //create objects using {} which group different values that related
-                title:'Get Groceries',
-                dueDate:'2023-04-01',
-                id:'id1'
-            },{
-                title:'Wash Car',
-                dueDate:'2023-04-02',
-                id:'id2'
-            },{
-                title:'Make Dinner',
-                dueDate:'2023-04-05',
-                id:'id3'
-            },{
-                title:'Do laundry',
-                dueDate:'2023-04-04',
-                id:'id4'
-            }];
+            
+            let todos;
+            //retrieve saved data
+            const savedTodos = JSON.parse(localStorage.getItem('todos'));
+            
+            if (Array.isArray(savedTodos)){
+
+                todos = savedTodos;
+            
+            }else{
+            
+                todos = [{            //create objects using {} which group different values that related
+                    title:'Get Groceries',
+                    dueDate:'2023-04-01',
+                    id:'id1'
+                },{
+                    title:'Wash Car',
+                    dueDate:'2023-04-02',
+                    id:'id2'
+                },{
+                    title:'Make Dinner',
+                    dueDate:'2023-04-05',
+                    id:'id3'
+                },{
+                    title:'Do laundry',
+                    dueDate:'2023-04-04',
+                    id:'id4'
+                }];
+            
+            }
+
             render();
             //creates a todo
             
@@ -41,6 +55,7 @@
                     id: id
                 });
 
+                saveTodos();
             }
             
             //deletes a todo
@@ -54,6 +69,13 @@
                     }
                 });
 
+                saveTodos();
+            }
+
+            //save todos
+
+            function saveTodos(){
+                localStorage.setItem('todos',JSON.stringify(todos));
             }
 
             //controller
